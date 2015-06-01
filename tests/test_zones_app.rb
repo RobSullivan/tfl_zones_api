@@ -18,7 +18,7 @@ class MyAppTest < Test::Unit::TestCase
 	def test_location_post
 		post '/api/v1/location/', params={:lng => 2, :lat => 1}
 		assert last_response.ok?
-		assert_equal 'localhost', last_response.headers['Access-Control-Allow-Origin']
+		assert_equal '*', last_response.headers['Access-Control-Allow-Origin']
 		assert last_response.body.include?('Zone 1')
 	end
 end	
