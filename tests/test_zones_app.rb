@@ -15,10 +15,10 @@ class MyAppTest < Test::Unit::TestCase
 	end
 
 	def test_get_zone
-		get '/api/v1/zone', params={:lng => 2, :lat => 1}
-		assert last_response.ok?
+		get '/api/v1/zone', params={:lng => -0.11, :lat => 51.54}
+		assert last_response.status.must_equal 200
 		assert_equal '*', last_response.headers['Access-Control-Allow-Origin']
-		assert last_response.body.include?('Zone 1')
+		assert last_response.body.include?('Zone 3')
 	end
 
 	
