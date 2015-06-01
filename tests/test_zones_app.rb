@@ -11,18 +11,14 @@ class MyAppTest < Test::Unit::TestCase
 
 	def test_my_default
 		get '/'
-		assert_equal 'Hello world', last_response.body
+		assert_equal 'Hello, welcome to TFL ZONESZZZZZZZZZ', last_response.body
 	end
 
-	def test_location
-		get '/location'
-		assert last_response.ok?
-		assert last_response.body.include?('you are at Latitude: got browser location, longitude: got browser location.')
-	end
 	
 	def test_location_post
-		post '/location/', params={:lng => 2, :lat => 1}
+		post '/api/v1/location/', params={:lng => 2, :lat => 1}
 		assert last_response.ok?
+		assert_equal '*', last_response.headers['Access-Control-Allow-Origin']
 		assert last_response.body.include?('Zone 1')
 	end
 end	
