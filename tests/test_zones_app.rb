@@ -28,7 +28,9 @@ class MyAppTest < Test::Unit::TestCase
 		get '/api/v1/zones/stations/:station', :station => "Tulse Hill"
 		assert last_response.ok?
 		assert_equal '*', last_response.headers['Access-Control-Allow-Origin']
-		assert last_response.body.include?('Zone 3')
+		assert
+		assert_equal "Station Tulse Hill is in Zone 3", last_response.body
+		
 	end
 
 	# def test_validate_lat_and_long

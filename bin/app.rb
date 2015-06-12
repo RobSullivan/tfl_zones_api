@@ -14,7 +14,7 @@ get '/api/v1/zones/stations/:station' do
 	headers \
 	"Access-Control-Allow-Origin" => "*"
 
-	station = params[:station].to_sym
+	station = params[:station]
 
 	erb :station, :locals => {'station' => station, 'zone' => "3"}
 end
