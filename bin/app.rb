@@ -9,9 +9,17 @@ get '/'  do
 	return 'Hello, welcome to TFL ZONESZZZZZZZZZ'	
 end
 	
+get '/api/v1/zones/stations/:station' do
+	status 200
+	headers \
+	"Access-Control-Allow-Origin" => "*"
 
+	station = params[:station].to_sym
 
-get '/api/v1/zone' do
+	erb :station, :locals => {'station' => station, 'zone' => "3"}
+end
+
+get '/api/v1/zone/' do
 	status 200
 	headers \
 	"Access-Control-Allow-Origin" => "*"
