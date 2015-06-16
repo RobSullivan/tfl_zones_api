@@ -8,6 +8,8 @@ set :views, "views"
 get '/'  do
 	erb :index	
 end
+
+
 	
 get '/api/v1/zones/stations/:station' do
 	#returns zone, lat & long
@@ -19,7 +21,7 @@ get '/api/v1/zones/stations/:station' do
 	
 end
 
-get '/api/v1/zones/location/' do
+get '/api/v1/zones/location' do
 	#returns zone, station and distance_to
 	status 200
 	headers "Access-Control-Allow-Origin" => "*"

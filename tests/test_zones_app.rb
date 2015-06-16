@@ -18,7 +18,7 @@ class MyAppTest < Test::Unit::TestCase
 	end
 
 	def test_get_zone_by_location
-		get '/api/v1/zones/location/', params={:lng => -0.11, :lat => 51.54}
+		get '/api/v1/zones/location', params={:lng => -0.11, :lat => 51.54}
 	 	assert last_response.ok?
 		assert_equal '*', last_response.headers['Access-Control-Allow-Origin']
 	 	
@@ -31,9 +31,17 @@ class MyAppTest < Test::Unit::TestCase
 		
 	end
 
-	# def test_validate_lat_and_long
+	def test_validate_string_param
+		get '/api/v1/zones/stations/:station', :station => "Northwood Hills"
+		assert_equal "Northwood Hills", last_request.params["station"]
+		assert last_request.params["station"].is_a?(String)
 
-	# end
+	end
+
+	def test_pass_non_string_param
+		get '/api/v1/zones/stations/:station', :station => 2
+		assert_equal last_response.status, 400
+	end
 
 	
 	
