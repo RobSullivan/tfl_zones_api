@@ -39,8 +39,9 @@ class AppTest < Test::Unit::TestCase
 
 	end
 
-	def test_pass_non_string_param
-		get '/api/v1/zones/stations/:station', :station => 2.23
+	def test_type_validation
+		get '/api/v1/zones/stations/:station'
+		
 		assert_equal 400, last_response.status
 	end
 
