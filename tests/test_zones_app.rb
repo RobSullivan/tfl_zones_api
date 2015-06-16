@@ -29,7 +29,7 @@ class MyAppTest < Test::Unit::TestCase
 		assert last_response.ok?
 		assert_equal '*', last_response.headers['Access-Control-Allow-Origin']
 		last_response.body do |line|
-			assert_equal "Station Tulse Hill is in Zone 3", line
+			assert_equal "Station Tulse Hill is in Zone 400", line
 		end
 		
 	end
