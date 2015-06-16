@@ -28,8 +28,9 @@ class MyAppTest < Test::Unit::TestCase
 		get '/api/v1/zones/stations/:station', :station => "Tulse Hill"
 		assert last_response.ok?
 		assert_equal '*', last_response.headers['Access-Control-Allow-Origin']
-		assert
-		assert_equal "Station Tulse Hill is in Zone 3", last_response.body
+		last_response.body do |line|
+			assert_equal "Station Tulse Hill is in Zone 3", line
+		end
 		
 	end
 

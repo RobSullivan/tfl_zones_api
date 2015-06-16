@@ -11,8 +11,7 @@ end
 	
 get '/api/v1/zones/stations/:station' do
 	status 200
-	headers \
-	"Access-Control-Allow-Origin" => "*"
+	headers "Access-Control-Allow-Origin" => "*"
 
 	station = params[:station]
 
@@ -21,8 +20,7 @@ end
 
 get '/api/v1/zone/' do
 	status 200
-	headers \
-	"Access-Control-Allow-Origin" => "*"
+	headers "Access-Control-Allow-Origin" => "*"
 
 	longitude = params['lng'] || "got browser location"
 	latitude = params['lat'] || "got browser location"
