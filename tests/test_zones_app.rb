@@ -14,23 +14,20 @@ class MyAppTest < Test::Unit::TestCase
 
 	def test_my_default
 		get '/'
-		assert_equal 'Hello, welcome to TFL ZONESZZZZZZZZZ', last_response.body
+		assert last_response.ok?
 	end
 
-	# def test_get_zone_by_location
-	# 	get '/api/v1/zones/location/', params={:lng => -0.11, :lat => 51.54}
-	# 	assert last_response.ok?
-	# 	assert_equal '*', last_response.headers['Access-Control-Allow-Origin']
-	# 	assert last_response.body.include?('Zone 3')
-	# end
+	def test_get_zone_by_location
+		get '/api/v1/zones/location/', params={:lng => -0.11, :lat => 51.54}
+	 	assert last_response.ok?
+		assert_equal '*', last_response.headers['Access-Control-Allow-Origin']
+	 	
+	 end
 
 	def test_get_zone_by_station
 		get '/api/v1/zones/stations/:station', :station => "Tulse Hill"
 		assert last_response.ok?
 		assert_equal '*', last_response.headers['Access-Control-Allow-Origin']
-		last_response.body do |line|
-			assert_equal "Station Tulse Hill is in Zone 400", line
-		end
 		
 	end
 

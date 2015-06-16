@@ -6,25 +6,23 @@ set :public_folder, "static"
 set :views, "views"
 
 get '/'  do
-	return 'Hello, welcome to TFL ZONESZZZZZZZZZ'	
+	erb :index	
 end
 	
 get '/api/v1/zones/stations/:station' do
+	#returns zone, lat & long
 	status 200
 	headers "Access-Control-Allow-Origin" => "*"
 
-	station = params[:station]
+	
 
-	erb :station, :locals => {'station' => station, 'zone' => "3"}
+	
 end
 
-get '/api/v1/zone/' do
+get '/api/v1/zones/location/' do
+	#returns zone, station and distance_to
 	status 200
 	headers "Access-Control-Allow-Origin" => "*"
 
-	longitude = params['lng'] || "got browser location"
-	latitude = params['lat'] || "got browser location"
-
-	erb :index, :locals => {'longitude' => longitude, 'latitude' => latitude}
-
 end
+
