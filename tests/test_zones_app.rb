@@ -60,3 +60,4 @@ class AppTest < Test::Unit::TestCase
 	
 	
 end	
+
