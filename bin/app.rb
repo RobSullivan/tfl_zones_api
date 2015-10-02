@@ -1,12 +1,11 @@
 require 'sinatra/base'
-require 'sinatra/param'
 require 'json'
 
 
 
 
 class App < Sinatra::Base
-	helpers Sinatra::Param
+	
 
 
 	set :port, 8080
@@ -17,9 +16,7 @@ class App < Sinatra::Base
 	set :raise_errors, true
 
 
-	before do
-		content_type :json
-	end
+	
 
 	get '/'  do
 		erb :index	
@@ -28,19 +25,26 @@ class App < Sinatra::Base
 
 		
 	get '/api/v1/zones/stations/:station' do
+		content_type :json
 		#returns zone, lat & long
-		param :station, String, required: true
-		
 		headers "Access-Control-Allow-Origin" => "*"
+		station = params['station']
 		
+		"6"
 	end
 
 	
 
-	get '/api/v1/zones/location' do
+	get '/api/v1/zones/location/?' do
 		#returns zone, station and distance_to
 		#status 200
+		content_type :json
 		headers "Access-Control-Allow-Origin" => "*"
+		longitude = params['lng']
+		latitude = params['lat']
+		
+		"3"
+		
 
 	end
 
