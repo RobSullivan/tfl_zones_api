@@ -1,6 +1,7 @@
 require 'sinatra/base'
 require 'json'
-require_relative 'db'
+require 'pg'
+
 
 
 
@@ -17,6 +18,21 @@ class App < Sinatra::Base
 	set :raise_errors, true
 
 
+
+	def with_db
+		db = PG.connect(
+			dbname:'Stations',
+			user:'user',
+			password: 'password')
+
+		begin
+			yield db
+
+		ensure
+			db.close
+		end
+	end
+
 	
 
 	get '/'  do
@@ -25,13 +41,19 @@ class App < Sinatra::Base
 
 
 		
-	get '/api/v1/zones/stations/:station' do
+	get '/api/v1/zones/stations/:station?' do
 		content_type :json
 		#returns zone, lat & long
 		headers "Access-Control-Allow-Origin" => "*"
-		station = params['station']
 		
-		"6"
+		with_db do |db|
+			sql = 'SELECT london_stations.zone FROM public.london_stations WHERE london_stations.station=$1'
+			results = db.exec_params(sql, [params['station']])
+			results.values().to_s
+		end
+		
+		
+		
 	end
 
 	

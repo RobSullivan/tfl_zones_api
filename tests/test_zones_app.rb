@@ -32,7 +32,7 @@ class AppTest < Test::Unit::TestCase
 	 end
 
 	def test_get_zone_by_station_response
-		get '/api/v1/zones/stations/:station', :station => "Tulse Hill"
+		get '/api/v1/zones/stations/', :station => "Tulse Hill"
 		assert_equal 200, last_response.status
 		assert last_response.ok?
 		assert_equal '*', last_response.headers['Access-Control-Allow-Origin']
@@ -40,7 +40,7 @@ class AppTest < Test::Unit::TestCase
 	end
 
 	def test_validate_string_param
-		get '/api/v1/zones/stations/:station', :station => "Northwood Hills"
+		get '/api/v1/zones/stations/', :station => "Northwood Hills"
 		assert_equal "Northwood Hills", last_request.params["station"]
 		assert last_request.params["station"].is_a?(String)
 
@@ -52,9 +52,15 @@ class AppTest < Test::Unit::TestCase
 	end
 
 	def test_get_zone_of_station
-		get '/api/v1/zones/stations/:station', :station => "Northwood Hills"
+		get '/api/v1/zones/stations/', :station => "Northwood Hills"
+
 		assert_equal "6", last_response.body['6']
 
+	end
+
+	def test_get_another_zone_of_a_station
+		get '/api/v1/zones/stations/', :station => "Denmark Hill"
+		assert_equal "2", last_response.body['2']
 	end
 
 	
