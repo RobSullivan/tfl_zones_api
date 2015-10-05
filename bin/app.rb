@@ -1,6 +1,8 @@
 require 'sinatra/base'
 require 'json'
 require 'pg'
+require 'georuby'
+
 
 
 
@@ -33,6 +35,11 @@ class App < Sinatra::Base
 		end
 	end
 
+	def make_geom_point(lng, lat)
+		point = GeoRuby::SimpleFeatures::Point
+		station_point = point.from_x_y(lng, lat)
+	end
+
 	
 
 	get '/'  do
@@ -63,10 +70,24 @@ class App < Sinatra::Base
 		#status 200
 		content_type :json
 		headers "Access-Control-Allow-Origin" => "*"
-		longitude = params['lng']
-		latitude = params['lat']
+		lng = params['lng']
+		lat = params['lat']
+		geom_point = make_geom_point(lng, lat)
+
+
+
+		#create a geom point from lng and lat to pass to SQL query
+
 		
-		"3"
+		
+
+		with_db do |db|
+			sql = 'SELECT st.station, st.zone, ST_Distance(st.geom, ride.geom_start) * 69.00 
+					FROM london_stations
+					WHERE ST_DWithin(st.geom, $1, 1/69.00)
+					ORDER BY distance ASC LIMIT 1;'
+			results = db.exec_params(sql[geom_point])
+		end
 		
 
 	end

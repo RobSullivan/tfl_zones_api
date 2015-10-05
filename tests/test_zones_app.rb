@@ -46,7 +46,7 @@ class AppTest < Test::Unit::TestCase
 
 	end
 
-	def test_get_zone_by_location
+	def test_get_station_zone_by_location
 		get '/api/v1/zones/location', params={:lng => -0.11, :lat => 51.54}
 		assert_equal "3", last_response.body['3']
 	end
