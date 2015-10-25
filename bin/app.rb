@@ -24,8 +24,8 @@ class App < Sinatra::Base
 	def with_db
 		db = PG.connect(
 			dbname:'Stations',
-			user:'user',
-			password: 'password')
+			user:'postgres',
+			password: '')
 
 		begin
 			yield db
