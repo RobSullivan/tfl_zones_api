@@ -78,7 +78,9 @@ class App < Sinatra::Base
 
 		#create a geom point from lng and lat to pass to SQL query
 
-		
+		#geom_point = geom_point.as_hex_ewkb
+
+		#geom_point = '0101000020E61000000AD7A3703D0AB7BFA4703D0AD7C34940'
 		
 
 		with_db do |db|
@@ -86,7 +88,7 @@ class App < Sinatra::Base
 					FROM london_stations
 					WHERE ST_DWithin(st.geom, $1, 1/69.00)
 					ORDER BY distance ASC LIMIT 1;'
-			results = db.exec_params(sql[geom_point])
+			results = db.exec_params(sql, ['0101000020E61000000AD7A3703D0AB7BFA4703D0AD7C34940'])
 		end
 		
 
