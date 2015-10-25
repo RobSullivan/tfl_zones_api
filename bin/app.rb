@@ -83,7 +83,11 @@ class App < Sinatra::Base
 					WHERE ST_DWithin(st.geom, $1, 1/69.00)
 					ORDER BY distance ASC LIMIT 1;'
 			results = db.exec_params(sql, [geom_point])
+			results.values().to_s
 		end
+
+		
+
 		
 
 	end

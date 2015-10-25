@@ -6,15 +6,20 @@ Accepts station name or station longitude and latitude.
 
 Developed on a Windows machine.
 
-## Dependencies
+
 ### Database
 
 Postgres with PostGis extension
+[Station data](https://github.com/RobSullivan/cycle-save)
 
 ### App
 
+A Sinatra client
+
+
+Update db username and password in app.rb
+
 
 Start database server
-Update username and password in app.rb
 
 `rake test`
