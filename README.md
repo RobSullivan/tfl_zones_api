@@ -1,4 +1,4 @@
-# tfl_zones_api
+# TFL Zones API
 
 An API that returns the zone of a station on the TFL map. 
 
@@ -9,8 +9,7 @@ Developed on a Windows machine.
 ## Dependencies
 ### Database
 
-PostgresSQL
-Postgres Gis extension
+Postgres with PostGis extension
 
 ### App
 
