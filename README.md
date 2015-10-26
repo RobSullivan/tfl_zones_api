@@ -18,7 +18,7 @@ Currently returns a string.
 
 ### Database
 
-- Postgres with (PostGIS)[http://postgis.net/] extension
+- Postgres with [PostGIS](http://postgis.net/) extension
 
 - [Station data](https://github.com/RobSullivan/cycle-save) - Credit to Chris Bell http://www.doogal.co.uk/london_stations.php 
 
