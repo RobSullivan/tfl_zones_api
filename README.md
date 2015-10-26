@@ -22,9 +22,9 @@ Currently returns a string.
 
 - [Station data](https://github.com/RobSullivan/cycle-save) - Credit to Chris Bell http://www.doogal.co.uk/london_stations.php 
 
-### App
+### API
 
-A Sinatra client
+Built using Sinatra
 
 
 
