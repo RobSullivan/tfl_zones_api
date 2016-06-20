@@ -1,15 +1,134 @@
-<!DOCTYPE html>
+<!doctype <!DOCTYPE html>
 <html>
-    <head>
-    <meta charset="UTF-8"></meta>
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<link rel="icon" href="favicon.ico">
-	<link rel="shortcut icon" href="favicon.ico">
-    <title>TFL Zones</title>
-    </head>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.indigo-pink.min.css">
+<script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+	<script type="text/javascript">
+	if (navigator.geolocation){
+		console.log('geolocation is supported')
+	} else {
+		console.log('geolocation is not supported')
+	}
+
+	window.onload = function(){
+		var startPos;
+
+		var geoOptions = {
+			maximumAge: 5 * 60 * 1000,
+			timeout: 10 * 1000
+		}
+
+		var geoSuccess = function(position){
+			startPos = position
+			document.getElementById('hidden-start-pos-lat').value = startPos.coords.latitude;
+			document.getElementById('hidden-start-pos-long').value 
+			= startPos.coords.longitude
+			//window.alert(startPos)
+		};
+		var geoError = function(error){
+			console.log('Error occurred. Error code: ' + error.code)
+		}
+		navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions)
+	};
+
+
+
+
+	</script>
+
+	<style>
+.demo-list-icon {
+  width: 300px;
+}
+
+.not-visible{
+	visibility: hidden;
+}
+
+
+</style>
+</head>
 <body>
 
-<p>Hello, welcome to zone finder</p>
 
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title">tfl-zone.me</span>
+      <!-- Add spacer, to align navigation to the right -->
+      <div class="mdl-layout-spacer"></div>
+      <!-- Navigation. We hide it in small screens. -->
+      <nav class="mdl-navigation mdl-layout--large-screen-only">
+        <a class="mdl-navigation__link" href="">about</a>
+        <a class="mdl-navigation__link" href="https://github.com/RobSullivan/tfl_zones_api">code</a>
+       
+      </nav>
+    </div>
+  </header>
+  <div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">Title</span>
+    <nav class="mdl-navigation">
+      <a class="mdl-navigation__link" href="">about</a>
+      <a class="mdl-navigation__link" href="https://github.com/RobSullivan/tfl_zones_api">code</a>
+      
+    </nav>
+  </div>
+  <main class="mdl-layout__content">
+    <div class="page-content"><!-- Your content goes here -->
+<!--button needs to be in a form because button is submit button-->
+<form action="/api/v1/zones/location/" method="get" target="_self">
+	<input class="not-visible" name="lat" id="hidden-start-pos-lat"/></input>
+	<input class="not-visible" name="lng" id="hidden-start-pos-long"/></input>
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="js-button-onclick"  autofocus="true" type="submit">
+  zone me
+  </button>
+  </form>
+
+  <!--
+	Attributes: formaction="/api/v1/zones/location/?"
+	formmethod="get" type="submit"formmethod="get" type="submit"
+  ->
+
+
+<!--after location sent, zone and stations revelead.-->
+<div><p>3<p></div>
+
+
+<!-- Icon List -->
+
+<!--List stations-->
+<ul class="demo-list-icon mdl-list">
+  <li class="mdl-list__item">
+    <span class="mdl-list__item-primary-content">
+    <i class="material-icons mdl-list__item-icon">train</i>
+    Tulse Hill 0.2mi - <a href="#">directions from loc to station</a>
+</span>
+  </li>
+  <li class="mdl-list__item">
+    <span class="mdl-list__item-primary-content">
+    <i class="material-icons mdl-list__item-icon">train</i>
+    Herne Hill - 0.49mi
+  </span>
+  
+  </li>
+  <li class="mdl-list__item">
+    <span class="mdl-list__item-primary-content">
+    <i class="material-icons mdl-list__item-icon">train</i>
+    Brixton 1.2mi
+  </span>
+  </li>
+</ul>
+
+
+
+
+</div>
+  </main>
+</div>
 </body>
 </html>
