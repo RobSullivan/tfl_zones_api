@@ -31,16 +31,12 @@ Built using Sinatra
 
 ### How to install
 
-Developed on a Windows machine.
-
-Update db username and password in app.rb
-
-Bundle install somewhere
+Coming soon.
 
 ### Running the app
 
 Start database server
-`command`
+
 
 Run the tests
 `rake test`

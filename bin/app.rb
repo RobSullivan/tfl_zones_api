@@ -23,8 +23,8 @@ class App < Sinatra::Base
 
 	def with_db
 		db = PG.connect(
-			dbname:'Stations',
-			user:'postgres',
+			dbname:'zones',
+			user:'zoneme',
 			password: '')
 
 		begin
@@ -54,7 +54,7 @@ class App < Sinatra::Base
 		headers "Access-Control-Allow-Origin" => "*"
 		
 		with_db do |db|
-			sql = 'SELECT london_stations.zone FROM public.london_stations WHERE london_stations.station=$1'
+			sql = 'SELECT stations.zone FROM public.stations WHERE stations.station=$1'
 			results = db.exec_params(sql, [params['station']])
 			results.values().to_s
 		end
@@ -79,7 +79,7 @@ class App < Sinatra::Base
 
 		with_db do |db|
 			sql = 'SELECT st.station, st.zone, ST_Distance(st.geom, $1) * 69.00 as distance
-					FROM london_stations st
+					FROM stations st
 					WHERE ST_DWithin(st.geom, $1, 1/69.00)
 					ORDER BY distance ASC LIMIT 1;'
 			results = db.exec_params(sql, [geom_point])
