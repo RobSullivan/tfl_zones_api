@@ -11,6 +11,7 @@ require 'georuby'
 class App < Sinatra::Base
 	
 
+	enable :sessions
 
 	set :port, 8080
 	set :static, true
@@ -44,6 +45,11 @@ class App < Sinatra::Base
 
 	get '/'  do
 		erb :index	
+	end
+
+	get '/zone' do
+		@zones = session[:zones]
+		erb :zone
 	end
 
 
@@ -81,9 +87,11 @@ class App < Sinatra::Base
 			sql = 'SELECT st.station, st.zone, ST_Distance(st.geom, $1) * 69.00 as distance
 					FROM stations st
 					WHERE ST_DWithin(st.geom, $1, 1/69.00)
-					ORDER BY distance ASC LIMIT 1;'
+					ORDER BY distance ASC LIMIT 3;'
 			results = db.exec_params(sql, [geom_point])
-			results.values().to_s
+			@zones = results.values()
+			session[:zones] = @zones
+			redirect to('/zone') #@zones
 		end
 
 		

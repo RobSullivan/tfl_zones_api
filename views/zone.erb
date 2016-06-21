@@ -80,17 +80,38 @@
   </div>
   <main class="mdl-layout__content">
     <div class="page-content"><!-- Your content goes here -->
-<!--button needs to be in a form because button is submit button-->
-<form action="/api/v1/zones/location/" method="get" target="_self">
-	<input class="not-visible" name="lat" id="hidden-start-pos-lat"/></input>
-	<input class="not-visible" name="lng" id="hidden-start-pos-long"/></input>
-    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="js-button-onclick"  autofocus="true" type="submit">
-  zone me
-  </button>
-  </form>
+
+<!--after location sent, zone and stations revelead.-->
+<div><p>3<p></div>
 
 
+<!-- Icon List -->
 
+<!--List stations-->
+<ul class="demo-list-icon mdl-list">
+<% @zones.each do |data| %>
+  <li class="mdl-list__item">
+    <span class="mdl-list__item-primary-content">
+    <i class="material-icons mdl-list__item-icon">train</i>
+    <%= data %> <a href="#">directions from loc to station</a>
+	</span>
+  </li>
+  <% end %>
+  <!--
+  <li class="mdl-list__item">
+    <span class="mdl-list__item-primary-content">
+    <i class="material-icons mdl-list__item-icon">train</i>
+    Herne Hill - 0.49mi
+  	</span>
+  
+  </li>
+  <li class="mdl-list__item">
+    <span class="mdl-list__item-primary-content">
+    <i class="material-icons mdl-list__item-icon">train</i>
+    Brixton 1.2mi
+  </span>
+  </li>-->
+</ul>
 
 
 
